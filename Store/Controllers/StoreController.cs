@@ -1,4 +1,5 @@
-﻿using Store.Models;
+﻿using Store.Functions;
+using Store.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,8 @@ namespace Store.Controllers
             return Content(HttpStatusCode.OK, item);
         }
 
+        [ApiAuthentication]
+
         public IHttpActionResult Post(Item item)
         {
             if (!ModelState.IsValid)
@@ -62,7 +65,7 @@ namespace Store.Controllers
             items.Add(item);
             return Content(HttpStatusCode.Created, "item was created succesfully!");
         }
-
+        [ApiAuthentication]
         public IHttpActionResult Put(int id, [FromBody] Item item)
         {
             if (!ModelState.IsValid)
@@ -89,7 +92,7 @@ namespace Store.Controllers
             }
             return Content(HttpStatusCode.OK, "item was updated succesfullt!");
         }
-
+        [ApiAuthentication]
         public IHttpActionResult Delete(int id)
         {
             Item item = items.Find(s => s.Id == id);
